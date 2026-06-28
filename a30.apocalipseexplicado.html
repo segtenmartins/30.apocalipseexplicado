@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linha do Tempo Escatológica: Visão Pré-Tribulacionista</title>
+    <style>
+        :root {
+            --primary: #1e293b;
+            --secondary: #0f172a;
+            --accent: #2563eb;
+            --text: #334155;
+            --light: #f8fafc;
+            --border: #e2e8f0;
+            --gold: #d97706;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            color: white;
+            padding: 3rem 1rem;
+            text-align: center;
+            border-bottom: 4px solid var(--accent);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            color: #94a3b8;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        header .author-info {
+            margin-top: 10px;
+            font-size: 1.2rem;
+            color: #f1f5f9;
+        }
+
+        header .author-info a {
+            color: #38bdf8;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        header .author-info a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background-color: white;
+            border: 1px solid var(--border);
+            padding: 0.75rem 1.5rem;
+            cursor: pointer;
+            border-radius: 8px;
+            font-weight: 600;
+            color: var(--primary);
+            transition: all 0.3s;
+        }
+
+        .tab-btn.active, .tab-btn:hover {
+            background-color: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+
+        .section-content {
+            display: none;
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+            animation: fadeIn 0.5s ease;
+        }
+
+        .section-content.active {
+            display: block;
+        }
+
+        /* Linha do Tempo */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background-color: var(--border);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px;
+        }
+
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            background-color: inherit;
+            width: 50%;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            right: -10px;
+            background-color: white;
+            border: 4px solid var(--accent);
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .left { left: 0; }
+        .right { left: 50%; }
+
+        .right::after { left: -10px; }
+
+        .timeline-card {
+            padding: 1.5rem;
+            background-color: var(--light);
+            position: relative;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .timeline-card h3 {
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .badge {
+            display: inline-block;
+            background-color: #dbeafe;
+            color: #1e40af;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin: 0.2rem;
+            text-decoration: none;
+            transition: background-color 0.2s;
+        }
+
+        .badge:hover {
+            background-color: #bfdbfe;
+        }
+
+        /* Perguntas estruturadas */
+        .grid-questions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .q-card {
+            background: var(--light);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-top: 4px solid var(--gold);
+        }
+
+        .q-card h3 {
+            color: var(--gold);
+            margin-bottom: 0.75rem;
+        }
+
+        .q-card a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .q-card a:hover {
+            text-decoration: underline;
+        }
+
+        /* Kids & Metáfora */
+        .kids-box {
+            background: #fef3c7;
+            border-left: 6px solid var(--gold);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+
+        .metafora-box {
+            background: #ecfdf5;
+            border-left: 6px solid #10b981;
+            padding: 1.5rem;
+            border-radius: 8px;
+            font-style: italic;
+        }
+
+        /* Tabelas e Ressurreições */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        th, td {
+            border: 1px solid var(--border);
+            padding: 0.75rem;
+            text-align: left;
+        }
+
+        th {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        table a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        table a:hover {
+            text-decoration: underline;
+        }
+
+        ul li {
+            margin-left: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        ul li a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        ul li a:hover {
+            text-decoration: underline;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsividade */
+        @media screen and (max-width: 600px) {
+            .timeline::after { left: 31px; }
+            .timeline-item { width: 100%; padding-left: 70px; padding-right: 25px; }
+            .timeline-item::after { left: 21px; }
+            .right { left: 0%; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Linha do Tempo Escatológica Clássica</h1>
+        <p>Estudo bíblico interativo baseado na perspectiva Pré-Tribulacionista — Versão Almeida Corrigida Fiel (ACF)</p>
+        <div class="author-info">
+            Pr João Alves — <a href="https://www.radiomateus633.com" target="_blank" rel="noopener noreferrer">www.radiomateus633.com</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Abas de Navegação Reordenadas -->
+        <div class="nav-tabs">
+            <button class="tab-btn active" onclick="openTab('criancas')">Visão Infantil & Metáfora</button>
+            <button class="tab-btn" onclick="openTab('significados')">Juízos Simbólicos vs Literais</button>
+            <button class="tab-btn" onclick="openTab('sequencia')">Sequência dos Eventos</button>
+            <button class="tab-btn" onclick="openTab('perguntas')">Análise Detalhada (5W2H)</button>
+            <button class="tab-btn" onclick="openTab('ressurreicoes')">As Ressurreições</button>
+        </div>
+
+        <!-- 1. ABA: CRIANÇAS & METÁFORA (Ativa por padrão) -->
+        <div id="criancas" class="section-content active">
+            <h2>Seção Didática: Para Crianças de 10 Anos</h2>
+            
+            <div class="kids-box">
+                <h3>O Resumo Simples em Poucas Palavras 👶✨</h3>
+                <p>1. <strong>Arrebatamento:</strong> Quem ama Jesus vai morar com Ele no céu.</p>
+                <p>2. <strong>Festa no Céu:</strong> Enquanto o céu celebra as Bodas, na terra começa um tempo muito triste e difícil chamado Grande Tribulação.</p>
+                <p>3. <strong>Conflito na Terra:</strong> Inimigos atacam Israel (Gogue e Magogue), mas Deus protege o Seu povo. Depois, as nações tentam lutar na grande guerra do Armagedom.</p>
+                <p>4. <strong>Vitória de Jesus:</strong> Jesus volta brilhando e de forma visível, vence o mal, governa por 1.000 anos (Milênio) e faz o julgamento final do Trono Branco.</p>
+                <p>5. <strong>Eternidade:</strong> No fim, Deus cria um lugar perfeito sem choro nem tristeza para vivermos com Ele para sempre!</p>
+            </div>
+
+            <div class="metafora-box">
+                <h3>📖 A Metáfora da Escola e da Professora</h3>
+                <p>"Uma grande escola tinha muitos alunos. Todos os anos a professora ensinava com muito cuidado: ela dava livros, explicava as lições e também avisava claramente o que ia acontecer na prova final.</p>
+                <p>Chegou o dia da avaliação final. Primeiro, a professora chamou uma parte dos alunos que confiaram nela e obedeceram ao que aprenderam. Eles foram levados para uma sala especial, receberam recompensa e tiveram uma festa boa, porque ficaram firmes.</p>
+                <p>Enquanto isso, na escola, começou um tempo de confusão e juízos: era como se as regras fossem ficando cada vez mais sérias, para mostrar quem realmente quis seguir os avisos.</p>
+                <p>Depois, chegou o fim da prova. A professora venceu o problema de vez e colocou todo mundo diante dela. Assim, cada aluno ficou sabendo exatamente o que ia acontecer com sua vida: os que foram para a sala da recompensa continuaram em paz, e os outros foram julgados com base no que fizeram, para saberem seu destino final.</p>
+                <p>E no final, a escola ficou em paz para sempre, porque a professora decidiu tudo com justiça."</p>
+            </div>
+        </div>
+
+        <!-- 2. ABA: JUÍZOS SIMBÓLICOS -->
+        <div id="significados" class="section-content">
+            <h2>Linguagem Profética: Simbólica na Forma, Literal nos Efeitos</h2>
+            <p style="margin-bottom: 2rem; color: #64748b;">Interpretação oficial clássica pré-tribulacionista:</p>
+
+            <div class="q-card" style="margin-bottom: 1.5rem; border-top-color: var(--accent);">
+                <h3>1. Os Selos (<a href="https://www.bibliaonline.com.br/acf/ap/6" target="_blank">Apocalipse 6–7</a>)</h3>
+                <p><strong>Forma Simbólica:</strong> Representam um livro/rolo divino sendo aberto em fases sucessivas (<a href="https://www.bibliaonline.com.br/acf/ap/5/1-5" target="_blank">Ap 5:1–5</a>).</p>
+                <p><strong>Efeito Literal:</strong> Trazem desastres reais e históricos à terra: guerras civis, escassez de mantimentos, mortandade em massa e desespero global.</p>
+            </div>
+
+            <div class="q-card" style="margin-bottom: 1.5rem; border-top-color: var(--accent);">
+                <h3>2. As Trombetas (<a href="https://www.bibliaonline.com.br/acf/ap/8" target="_blank">Apocalipse 8–9</a>)</h3>
+                <p><strong>Forma Simbólica:</strong> Instrumentos de toque que servem como anúncios solenes de juízos vindos de cima.</p>
+                <p><strong>Efeito Literal:</strong> Pragas físicas reais sobre a ecologia, águas amargosas, pragas infernais e tormento doloroso aos não selados.</p>
+            </div>
+
+            <div class="q-card" style="border-top-color: var(--accent);">
+                <h3>3. As Taças (<a href="https://www.bibliaonline.com.br/acf/ap/15" target="_blank">Apocalipse 15–16</a>)</h3>
+                <p><strong>Forma Simbólica:</strong> Recipientes que concentram a indignação final e justa de Deus antes do desfecho.</p>
+                <p><strong>Efeito Literal:</strong> Feridas malignas, mares transformados em sangue, calor insuportável e trevas no trono do Anticristo.</p>
+            </div>
+        </div>
+
+        <!-- 3. ABA: SEQUÊNCIA -->
+        <div id="sequencia" class="section-content">
+            <h2>Linha do Tempo Cronológica Clássica</h2>
+            <p style="margin-bottom: 2rem; color: #64748b;">Navegue pela ordem profética cronológica dos acontecimentos na terra e no céu (clique nos versículos para ler na versão ACF):</p>
+            
+            <div class="timeline">
+                <div class="timeline-item left">
+                    <div class="timeline-card">
+                        <h3>1. Arrebatamento</h3>
+                        <p>A igreja é retirada da terra para encontrar o Senhor nos ares.</p>
+                        <a class="badge" href="https://www.bibliaonline.com.br/acf/1ts/4/16-17" target="_blank">1 Ts 4:16–17</a> 
+                        <a class="badge" href="https://www.bibliaonline.com.br/acf/1co/15/51-52" target="_blank">1 Co 15:51–52</a>
+                    </div>
+                </div>
+                <div class="timeline-item right">
+                    <div class="timeline-card">
+                        <h3>2. Eventos no Céu</h3>
+                        <p>Enquanto a terra passa por tribulação, ocorrem o Tribunal de Cristo (recompensas) e as Bodas do Cordeiro.</p>
+                        <a class="badge" href="https://www.bibliaonline.com.br/acf/2co/5/10" target="_blank">2 Co 5:10</a> 
+                        <a class="badge" href="https://www.bibliaonline.com.br/acf/ap/19/7-9" target="_blank">Ap 19:7–9</a> 
+                        <a class="badge" href="https://www.bibliaonline.com.br/acf/ap/4/1" target="_blank">Ap 4:1</a>
+                    </div>
+                </div>
+                <div class="timeline-item left">
+                    <div class="timeline-card">
+                        <h3>3. Grande Tribulação (Na Terra)</h3>
+                        <p>Período de 7 anos marcado pelo derramamento dos juízos de Deus e perseguição do sistema da Besta.</p>
+                        <a class="badge" href="https://www.bibliaonline.com.br/acf/ap/6/1-17" target="_blank">Selos: Ap 6:1-17</a> 
+                        <a class="badge" href="https://www.bibliaonline.com.br/acf/ap/7" target="_blank">Ap 7</a>
+                        <a class="badge" href="https://www.bibliaonline.com.br/acf/ap/8/6-13" target="_blank">Trombetas: Ap 8:6-13</a>
+                        <a class="badge" href="https://www.bibliaonline.com.br/acf/ap/9" target="_blank">Ap 9</a>
+                    </div>
+                </div>
+                <div class="timeline-item right">
+                    <div class="timeline-card">
+                        <h3>4. Ataque de Gogue e Magogue</h3>
+                        <p>Um ataque inicial planejado contra o povo de Israel, severamente derrotado pela intervenção direta de Deus.</p>
+                        <a class="badge" href="https://www.bibliaonline.com.br/acf/ez/38/1-23" target="_blank">Ez 38:1–23</a> 
+                        <a class="badge" href="https://www.bibliaonline.com.br/acf/ez/39/1-29" target="_blank">Ez 39:1–29</a>
+                    </div>
+                </div>
+                <div class="timeline-item left">
+                    <div class="timeline-card">
+                        <h3>5. Juízos das Taças</h3>
+                        <p>A fase final e mais intensa da ira divina derramada sobre os impenitentes.</p>
+                        <a class="badge" href="https://www.bibliaonline.com.br/acf/ap/15/1" target="_blank">Ap 15:1</a> 
+                        <a class="badge" href="https://www.bibliaonline.com.br/acf/ap/16/1-21" target="_blank">Ap 16:1–21</a>
+                    </div>
+                </div>
+                <div class="timeline-item right">
+                    <div class="timeline-card">
+                        <h3>6. Clímax: Armagedom</h3>
+                        <p>O ajuntamento das nações rebeldes que marcham para guerrear contra Deus.</p>
+                        <a class="badge" href="https://www.bibliaonline.com.br/acf/ap/16/16" target="_blank">Ap 16:16</a> 
+                        <a class="badge" href="https://www.bibliaonline.com.br/acf/ap/19/19" target="_blank">Ap 19:19</a>
+                    </div>
+                </div>
+                <div class="timeline-item left">
+                    <div class="timeline-card">
+                        <h3>7. Segunda Vinda de Cristo</h3>
+                        <p>Jesus manifesta-se visivelmente e em glória para derrotar as nações inimigas e estabelecer a justiça.</p>
+                        <a class="badge" href="https://www.bibliaonline.com.br/acf/mt/24/29-30" target="_blank">Mt 24:29–30</a> 
+                        <a class="badge" href="https://www.bibliaonline.com.br/acf/ap/19/11-16" target="_blank">Ap 19:11–16</a>
+                    </div>
+                </div>
+                <div class="timeline-item right">
+                    <div class="timeline-card">
+                        <h3>8. O Milênio</h3>
+                        <p>Reinado literal de 1000 anos de Jesus Cristo na terra governando com os Seus santos ressurretos.</p>
+                        <a class="badge" href="https://www.bibliaonline.com.br/acf/ap/20/1-6" target="_blank">Ap 20:1–6</a>
+                    </div>
+                </div>
+                <div class="timeline-item left">
+                    <div class="timeline-card">
+                        <h3>9. Julgamento do Trono Branco</h3>
+                        <p>O julgamento final perante o Criador de todos aqueles que não participaram da primeira ressurreição.</p>
+                        <a class="badge" href="https://www.bibliaonline.com.br/acf/ap/20/11-15" target="_blank">Ap 20:11–15</a>
+                    </div>
+                </div>
+                <div class="timeline-item right">
+                    <div class="timeline-card">
+                        <h3>10. O Estado Eterno</h3>
+                        <p>Novos céus e nova terra. Ausência total de dor, onde os salvos habitarão para sempre com Deus.</p>
+                        <a class="badge" href="https://www.bibliaonline.com.br/acf/ap/21/1-5" target="_blank">Ap 21:1–5</a> 
+                        <a class="badge" href="https://www.bibliaonline.com.br/acf/ap/22/1-5" target="_blank">Ap 22:1–5</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. ABA: ANÁLISE DETALHADA -->
+        <div id="perguntas" class="section-content">
+            <h2>As Grandes Perguntas da Tribulação</h2>
+            <p style="margin-bottom: 2rem; color: #64748b;">Estrutura analítica dos fundamentos teológicos:</p>
+            
+            <div class="grid-questions">
+                <div class="q-card">
+                    <h3>O Quê?</h3>
+                    <p>Os juízos da Grande Tribulação são para quem não se arrepende e não obedece. Mesmo sob forte castigo, as pessoas insistem na impiedade e se recusam a abandonar o pecado.</p>
+                    <br>
+                    <small>Bases ACF: 
+                        <a href="https://www.bibliaonline.com.br/acf/ap/6/15-17" target="_blank">Ap 6:15–17</a>, 
+                        <a href="https://www.bibliaonline.com.br/acf/ap/9/20-21" target="_blank">Ap 9:20–21</a>, 
+                        <a href="https://www.bibliaonline.com.br/acf/ap/16/9" target="_blank">Ap 16:9</a>, 
+                        <a href="https://www.bibliaonline.com.br/acf/ap/16/11" target="_blank">Ap 16:11</a>, 
+                        <a href="https://www.bibliaonline.com.br/acf/jo/3/18-19" target="_blank">Jo 3:18–19</a>, 
+                        <a href="https://www.bibliaonline.com.br/acf/lc/13/3" target="_blank">Lc 13:3,5</a>, 
+                        <a href="https://www.bibliaonline.com.br/acf/2ts/2/10-12" target="_blank">2 Ts 2:10–12</a>.
+                    </small>
+                </div>
+                
+                <div class="q-card">
+                    <h3>Onde?</h3>
+                    <p>A Grande Tribulação acontece na **terra** (não no céu). Os juízos atingem diretamente o solo terrestre e seus moradores habituais, focando o remanescente em Israel.</p>
+                    <br>
+                    <small>Bases ACF: 
+                        <a href="https://www.bibliaonline.com.br/acf/ap/6/1-17" target="_blank">Ap 6:1–17</a>, 
+                        <a href="https://www.bibliaonline.com.br/acf/ap/8/6-13" target="_blank">Ap 8:6–13</a>, 
+                        <a href="https://www.bibliaonline.com.br/acf/ap/16/2-21" target="_blank">Ap 16:2–21</a>, 
+                        <a href="https://www.bibliaonline.com.br/acf/ez/38" target="_blank">Ez 38</a>, 
+                        <a href="https://www.bibliaonline.com.br/acf/ez/39" target="_blank">Ez 39</a>.
+                    </small>
+                </div>
+
+                <div class="q-card">
+                    <h3>Quem?</h3>
+                    <p>Os principais personagens são: Deus, o Cordeiro (Jesus), os santos/crentes da tribulação, Israel fiel, a Besta, o Falso Profeta, o Dragão (Satanás), as nações aliadas e os homens impenitentes.</p>
+                    <br>
+                    <small>Bases ACF: 
+                        <a href="https://www.bibliaonline.com.br/acf/ap/7/9-17" target="_blank">Ap 7:9–17</a>, 
+                        <a href="https://www.bibliaonline.com.br/acf/ap/12/17" target="_blank">Ap 12:17</a>, 
+                        <a href="https://www.bibliaonline.com.br/acf/ap/13/1-10" target="_blank">Ap 13:1–10</a>, 
+                        <a href="https://www.bibliaonline.com.br/acf/ap/13/11-18" target="_blank">Ap 13:11–18</a>.
+                    </small>
+                </div>
+
+                <div class="q-card">
+                    <h3>Quando?</h3>
+                    <p>Acontece rigorosamente após o arrebatamento da igreja e antes da vinda visível de Jesus in glória. Tem a duração exata de **7 anos** (dividida em duas metades).</p>
+                    <br>
+                    <small>Ordem cronológica baseada em Daniel e Apocalipse.</small>
+                </div>
+
+                <div class="q-card">
+                    <h3>Como?</h3>
+                    <p>Ocorre em uma escalada progressiva de flagelos ordenados no livro de Apocalipse: os 7 Selos iniciais, seguidos pelas 7 Trombetas ampliadas e as 7 Taças da cólera final, fechando na batalha do Armagedom.</p>
+                </div>
+
+                <div class="q-card">
+                    <h3>Por quê?</h3>
+                    <p>Chama-se assim por ser o ápice absoluto do sofrimento humano na história, provocado pela ira direta de Deus contra o pecado organizado e pela opressão feroz exercida pelo Anticristo.</p>
+                    <br>
+                    <small>Bases ACF: 
+                        <a href="https://www.bibliaonline.com.br/acf/mt/24/21" target="_blank">Mt 24:21</a>, 
+                        <a href="https://www.bibliaonline.com.br/acf/ap/6/9-11" target="_blank">Ap 6:9–11</a>.
+                    </small>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. ABA: RESSURREIÇÕES -->
+        <div id="ressurreicoes" class="section-content">
+            <h2>As Etapas da Ressurreição na Escatologia</h2>
+            <p style="margin-bottom: 1rem;">Na doutrina pré-tribulacionista, as ressurreições acontecem em etapas organizadas por grupos, mas **cada indivíduo só ressuscita uma vez**.</p>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Fase / Grupo</th>
+                        <th>Momento Profético</th>
+                        <th>Objetivo e Destino</th>
+                        <th>Versículo ACF</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Arrebatamento da Igreja</strong></td>
+                        <td>Antes da Tribulação</td>
+                        <td>Ressurreição dos mortos que faleceram crendo in Cristo.</td>
+                        <td><a href="https://www.bibliaonline.com.br/acf/1ts/4/16" target="_blank">1 Ts 4:16</a></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Primeira Ressurreição (Mártires)</strong></td>
+                        <td>Fim da Grande Tribulação</td>
+                        <td>Voltam à vida os decapitados pela fé na Tribulação para reinar por mil anos.</td>
+                        <td><a href="https://www.bibliaonline.com.br/acf/ap/20/4-6" target="_blank">Ap 20:4–6</a></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Segunda Ressurreição</strong></td>
+                        <td>Após o Milênio</td>
+                        <td>Ressurreição de todos os descreventes restantes para o julgamento final.</td>
+                        <td><a href="https://www.bibliaonline.com.br/acf/ap/20/11-15" target="_blank">Ap 20:11–15</a></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 style="margin-top: 2rem; margin-bottom: 1rem;">Exemplos Históricos de Ressurreição Temporária no NT (Milagres de retorno à vida terrena):</h3>
+            <ul>
+                <li>Lázaro de Betânia: <a href="https://www.bibliaonline.com.br/acf/jo/11/38-44" target="_blank">João 11:38–44</a></li>
+                <li>Filha de Jairo: <a href="https://www.bibliaonline.com.br/acf/mc/5/22-43" target="_blank">Marcos 5:22–43</a></li>
+                <li>Filho da viúva de Naim: <a href="https://www.bibliaonline.com.br/acf/lc/7/11-17" target="_blank">Lucas 7:11–17</a></li>
+                <li>Tabita (Dorcas): <a href="https://www.bibliaonline.com.br/acf/at/9/36-42" target="_blank">Atos 9:36–42</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        function openTab(tabId) {
+            const contents = document.querySelectorAll('.section-content');
+            contents.forEach(content => content.classList.remove('active'));
+
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+
+            document.getElementById(tabId).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+    </script>
+</body>
+</html>
