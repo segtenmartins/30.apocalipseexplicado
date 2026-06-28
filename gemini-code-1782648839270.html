@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linha do Tempo Escatológica: Visão Pré-Tribulacionista</title>
+    <style>
+        :root {
+            --primary: #1e293b;
+            --secondary: #0f172a;
+            --accent: #2563eb;
+            --text: #334155;
+            --light: #f8fafc;
+            --border: #e2e8f0;
+            --gold: #d97706;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            color: white;
+            padding: 3rem 1rem;
+            text-align: center;
+            border-bottom: 4px solid var(--accent);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            color: #94a3b8;
+            font-size: 1.1rem;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background-color: white;
+            border: 1px solid var(--border);
+            padding: 0.75rem 1.5rem;
+            cursor: pointer;
+            border-radius: 8px;
+            font-weight: 600;
+            color: var(--primary);
+            transition: all 0.3s;
+        }
+
+        .tab-btn.active, .tab-btn:hover {
+            background-color: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+
+        .section-content {
+            display: none;
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+            animation: fadeIn 0.5s ease;
+        }
+
+        .section-content.active {
+            display: block;
+        }
+
+        /* Linha do Tempo */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background-color: var(--border);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px;
+        }
+
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            background-color: inherit;
+            width: 50%;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            right: -10px;
+            background-color: white;
+            border: 4px solid var(--accent);
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .left { left: 0; }
+        .right { left: 50%; }
+
+        .right::after { left: -10px; }
+
+        .timeline-card {
+            padding: 1.5rem;
+            background-color: var(--light);
+            position: relative;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .timeline-card h3 {
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .badge {
+            display: inline-block;
+            background-color: #dbeafe;
+            color: #1e40af;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin: 0.2rem;
+        }
+
+        /* Perguntas estruturadas 5W2H */
+        .grid-questions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .q-card {
+            background: var(--light);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-top: 4px solid var(--gold);
+        }
+
+        .q-card h3 {
+            color: var(--gold);
+            margin-bottom: 0.75rem;
+        }
+
+        /* Kids & Metáfora */
+        .kids-box {
+            background: #fef3c7;
+            border-left: 6px solid var(--gold);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+
+        .metafora-box {
+            background: #ecfdf5;
+            border-left: 6px solid #10b981;
+            padding: 1.5rem;
+            border-radius: 8px;
+            font-style: italic;
+        }
+
+        /* Tabelas e Ressurreições */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        th, td {
+            border: 1px solid var(--border);
+            padding: 0.75rem;
+            text-align: left;
+        }
+
+        th {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        blockquote {
+            background: #f1f5f9;
+            border-left: 4px solid #64748b;
+            padding: 0.5rem 1rem;
+            margin: 1rem 0;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsividade */
+        @media screen and (max-width: 600px) {
+            .timeline::after { left: 31px; }
+            .timeline-item { width: 100%; padding-left: 70px; padding-right: 25px; }
+            .timeline-item::after { left: 21px; }
+            .right { left: 0%; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Linha do Tempo Escatológica Clássica</h1>
+        <p>Estudo bíblico interativo baseado na perspectiva Pré-Tribulacionista[cite: 1]</p>
+    </header>
+
+    <div class="container">
+        <!-- Abas de Navegação -->
+        <div class="nav-tabs">
+            <button class="tab-btn active" onclick="openTab('sequencia')">Sequência dos Eventos</button>
+            <button class="tab-btn" onclick="openTab('perguntas')">Análise Detalhada (5W2H)</button>
+            <button class="tab-btn" onclick="openTab('significados')">Juízos Simbólicos vs Literais</button>
+            <button class="tab-btn" onclick="openTab('ressurreicoes')">As Ressurreições</button>
+            <button class="tab-btn" onclick="openTab('criancas')">Visão Infantil & Metáfora</button>
+        </div>
+
+        <!-- ABA 1: SEQUÊNCIA -->
+        <div id="sequencia" class="section-content active">
+            <h2>Linha do Tempo Cronológica Clássica[cite: 1]</h2>
+            <p style="margin-bottom: 2rem; color: #64748b;">Navegue pela ordem profética cronológica dos acontecimentos na terra e no céu[cite: 1]:</p>
+            
+            <div class="timeline">
+                <div class="timeline-item left">
+                    <div class="timeline-card">
+                        <h3>1. Arrebatamento[cite: 1]</h3>
+                        <p>A igreja é retirada da terra para encontrar o Senhor nos ares[cite: 1].</p>
+                        <span class="badge">1 Ts 4:16–17</span> <span class="badge">1 Coríntios 15:51–52</span>
+                    </div>
+                </div>
+                <div class="timeline-item right">
+                    <div class="timeline-card">
+                        <h3>2. Eventos no Céu[cite: 1]</h3>
+                        <p>Enquanto a terra passa por tribulação, ocorrem o Tribunal de Cristo (recompensas) e as Bodas do Cordeiro[cite: 1].</p>
+                        <span class="badge">2 Coríntios 5:10</span> <span class="badge">Apocalipse 19:7–9</span> <span class="badge">Apocalipse 4:1</span>
+                    </div>
+                </div>
+                <div class="timeline-item left">
+                    <div class="timeline-card">
+                        <h3>3. Grande Tribulação (Na Terra)[cite: 1]</h3>
+                        <p>Período de 7 anos marcado pelo derramamento dos juízos de Deus e perseguição do sistema da Besta[cite: 1].</p>
+                        <span class="badge">Selos: Ap 6-7</span> <span class="badge">Trombetas: Ap 8-9</span>
+                    </div>
+                </div>
+                <div class="timeline-item right">
+                    <div class="timeline-card">
+                        <h3>4. Ataque de Gogue e Magogue[cite: 1]</h3>
+                        <p>Um ataque inicial planejado contra o povo de Israel, severamente derrotado pela intervenção direta de Deus[cite: 1].</p>
+                        <span class="badge">Ezequiel 38:1–23</span> <span class="badge">Ezequiel 39:1–29</span>
+                    </div>
+                </div>
+                <div class="timeline-item left">
+                    <div class="timeline-card">
+                        <h3>5. Juízos das Taças[cite: 1]</h3>
+                        <p>A fase final e mais intensa da ira divina derramada sobre os impenitentes[cite: 1].</p>
+                        <span class="badge">Apocalipse 15:1</span> <span class="badge">Apocalipse 16:1–21</span>
+                    </div>
+                </div>
+                <div class="timeline-item right">
+                    <div class="timeline-card">
+                        <h3>6. Clímax: Armagedom[cite: 1]</h3>
+                        <p>O ajuntamento das nações rebeldes que marcham para guerrear contra Deus[cite: 1].</p>
+                        <span class="badge">Apocalipse 16:16</span> <span class="badge">Apocalipse 19:19</span>
+                    </div>
+                </div>
+                <div class="timeline-item left">
+                    <div class="timeline-card">
+                        <h3>7. Segunda Vinda de Cristo[cite: 1]</h3>
+                        <p>Jesus manifesta-se visivelmente e em glória para derrotar as nações inimigas e estabelecer a justiça[cite: 1].</p>
+                        <span class="badge">Mateus 24:29–30</span> <span class="badge">Apocalipse 19:11–16</span>
+                    </div>
+                </div>
+                <div class="timeline-item right">
+                    <div class="timeline-card">
+                        <h3>8. O Milênio[cite: 1]</h3>
+                        <p>Reinado literal de 1000 anos de Jesus Cristo na terra governando com os Seus santos ressurretos[cite: 1].</p>
+                        <span class="badge">Apocalipse 20:1–6</span>
+                    </div>
+                </div>
+                <div class="timeline-item left">
+                    <div class="timeline-card">
+                        <h3>9. Julgamento do Trono Branco[cite: 1]</h3>
+                        <p>O julgamento final perante o Criador de todos aqueles que não participaram da primeira ressurreição[cite: 1].</p>
+                        <span class="badge">Apocalipse 20:11–15</span>
+                    </div>
+                </div>
+                <div class="timeline-item right">
+                    <div class="timeline-card">
+                        <h3>10. O Estado Eterno[cite: 1]</h3>
+                        <p>Novos céus e nova terra. Ausência total de dor, onde os salvos habitarão para sempre com Deus[cite: 1].</p>
+                        <span class="badge">Apocalipse 21:1–5</span> <span class="badge">Apocalipse 22:1–5</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ABA 2: PERGUNTAS (5W2H) -->
+        <div id="perguntas" class="section-content">
+            <h2>As Grandes Perguntas da Tribulação[cite: 1]</h2>
+            <p style="margin-bottom: 2rem; color: #64748b;">Estrutura analítica dos fundamentos teológicos expostos no documento[cite: 1]:</p>
+            
+            <div class="grid-questions">
+                <div class="q-card">
+                    <h3>O Quê?[cite: 1]</h3>
+                    <p>A base bíblica prova que os juízos da Grande Tribulação são direcionados especificamente para quem rejeita e não obedece a Deus[cite: 1]. Mesmo sob intensas pragas, o texto relata a completa ausência de arrependimento moral[cite: 1].</p>
+                    <small>Ref: Ap 9:20–21, Ap 16:9-11, João 3:18-19, Lucas 13:3[cite: 1].</small>
+                </div>
+                
+                <div class="q-card">
+                    <h3>Onde?[cite: 1]</h3>
+                    <p>Acontece estritamente **na terra**[cite: 1]. Enquanto a igreja está no céu, os personagens históricos e geográficos (como Israel em Ezequiel e os impenitentes) sofrem os flagelos geograficamente no plano terreno[cite: 1].</p>
+                    <small>Ref: Ap 6:1-17, Ez 38-39[cite: 1].</small>
+                </div>
+
+                <div class="q-card">
+                    <h3>Quem?[cite: 1]</h3>
+                    <p>Os protagonistas desse período dividem-se entre forças espirituais e terrenas: Deus, o Cordeiro, os santos tribulacionais (judeus e gentios fiéis), Israel, a Trindade Satânica (Satanás/Dragão, a Besta e o Falso Profeta), além dos reis e nações impenitentes[cite: 1].</p>
+                    <small>Ref: Ap 7:9-17, Ap 13, Ap 16:13-16[cite: 1].</small>
+                </div>
+
+                <div class="q-card">
+                    <h3>Quando?[cite: 1]</h3>
+                    <p>Inicia-se **após o arrebatamento da Igreja** e encerra-se com a volta visível de Jesus[cite: 1]. Tem uma duração profética estipulada de **7 anos**, geralmente dividida em duas metades simétricas[cite: 1].</p>
+                </div>
+
+                <div class="q-card">
+                    <h3>Como?[cite: 1]</h3>
+                    <p>Desenvolve-se em uma escalada progressiva de gravidade dividida em três blocos sucessivos de juízos: a abertura sequencial dos Selos, o soar das Trombetas e o derramamento final das Taças, culminando no Armagedom[cite: 1].</p>
+                </div>
+
+                <div class="q-card">
+                    <h3>Por quê?[cite: 1]</h3>
+                    <p>Chama-se "Grande" Tribulação devido à magnitude sem precedentes de sofrimento global e angústia gerada pela união do juízo divino direto com a opressão tirânica do governo anticristão[cite: 1].</p>
+                    <small>Ref: Mateus 24:21, Ap 6:9-11[cite: 1].</small>
+                </div>
+            </div>
+        </div>
+
+        <!-- ABA 3: SIGNIFICADOS -->
+        <div id="significados" class="section-content">
+            <h2>Linguagem Profética: Simbólica na Forma, Literal nos Efeitos[cite: 1]</h2>
+            <p style="margin-bottom: 2rem; color: #64748b;">Entenda como o pré-tribulacionismo clássico interpreta as figuras do livro de Apocalipse[cite: 1]:</p>
+
+            <div class="q-card" style="margin-bottom: 1.5rem; border-top-color: var(--accent);">
+                <h3>1. Os Selos (Apocalipse 6–7)[cite: 1]</h3>
+                <p>**Forma Simbólica:** Representam a abertura em etapas de um livro ou rolo que contém os decretos ocultos de Deus[cite: 1].</p>
+                <p>**Efeito Literal:** Desencadeia catástrofes mundiais verificáveis: guerras reais, crises de fome, colapsos econômicos e grande terror social[cite: 1].</p>
+            </div>
+
+            <div class="q-card" style="margin-bottom: 1.5rem; border-top-color: var(--accent);">
+                <h3>2. As Trombetas (Apocalipse 8–9)[cite: 1]</h3>
+                <p>**Forma Simbólica:** O toque não representa um concerto musical humano, mas sim um sinal de alerta divino e convocação angelical para a ação[cite: 1].</p>
+                <p>**Efeito Literal:** Pragas severas e concretas que afetam diretamente a ecologia da Terra (oceanos, fontes de água, vegetação) e trazem tormento à humanidade[cite: 1].</p>
+            </div>
+
+            <div class="q-card" style="border-top-color: var(--accent);">
+                <h3>3. As Taças (Apocalipse 15–16)[cite: 1]</h3>
+                <p>**Forma Simbólica:** Recipientes que tipificam o acúmulo e o derramamento concentrado da ira e da justiça de Deus[cite: 1].</p>
+                <p>**Efeito Literal:** Flagelos devastadores e terminais que assolam o reino da besta, evidenciando a obstinação final e a blasfêmia dos homens na terra[cite: 1].</p>
+            </div>
+        </div>
+
+        <!-- ABA 4: RESSURREIÇÕES -->
+        <div id="ressurreicoes" class="section-content">
+            <h2>As Etapas da Ressurreição na Escatologia[cite: 1]</h2>
+            <p>Um ponto central do estudo é que, embora a Bíblia mostre ordens e etapas diferentes para grupos distintos, **cada indivíduo só ressuscita uma única vez**[cite: 1]. Não há dupla ressurreição para a mesma pessoa[cite: 1].</p>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Fase / Grupo</th>
+                        <th>Momento Profético</th>
+                        <th>Objetivo e Destino</th>
+                        <th>Textos Base</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Arrebatamento</strong></td>
+                        <td>Início/Antes da Tribulação</td>
+                        <td>Os mortos em Cristo ressuscitam para encontrar o Senhor e ir para o céu[cite: 1].</td>
+                        <td>1 Ts 4:16, 1 Co 15:51–52[cite: 1]</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Primeira Ressurreição (Mártires)</strong></td>
+                        <td>Fim da Grande Tribulação</td>
+                        <td>Os que foram fiéis até a morte na tribulação ganham vida para reinar com Cristo por 1000 anos[cite: 1].</td>
+                        <td>Apocalipse 20:4–6[cite: 1]</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Segunda Ressurreição</strong></td>
+                        <td>Após o Milênio</td>
+                        <td>Todos os demais mortos ressuscitam para comparecer perante o Grande Trono Branco para julgamento final[cite: 1].</td>
+                        <td>Apocalipse 20:11–15[cite: 1]</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 style="margin-top: 2rem;">Exemplos Históricos no Novo Testamento (Ressurreições como milagres temporários)[cite: 1]:</h3>
+            <ul>
+                <li>Lázaro trazido de volta à vida por Jesus (João 11:38–44)[cite: 1].</li>
+                <li>A filha de Jairo (Marcos 5:22–24)[cite: 1].</li>
+                <li>O filho da viúva de Naim (Lucas 7:11–17)[cite: 1].</li>
+                <li>Tabita (Dorcas) ressuscitada por meio do apóstolo Pedro (Atos 9:36–42)[cite: 1].</li>
+            </ul>
+        </div>
+
+        <!-- ABA 5: CRIANÇAS -->
+        <div id="criancas" class="section-content">
+            <h2>Seção Didática: Para Crianças de 10 Anos[cite: 1]</h2>
+            
+            <div class="kids-box">
+                <h3>O Resumo Simples em Poucas Palavras 👶✨[cite: 1]</h3>
+                <p>1. **Arrebatamento:** Quem ama Jesus vai morar com Ele no céu[cite: 1].</p>
+                <p>2. **Festa no Céu:** Enquanto o céu celebra as Bodas, na terra começa um tempo muito triste e difícil (Tribulação)[cite: 1].</p>
+                <p>3. **Conflito na Terra:** Inimigos atacam Israel (Gogue e Magogue), mas Deus os protege. Depois, as nações tentam lutar na grande guerra do Armagedom[cite: 1].</p>
+                <p>4. **Vitória de Jesus:** Jesus volta de forma visível, vence o mal, governa por 1.000 anos (Milênio) e faz o grande julgamento final do Trono Branco[cite: 1].</p>
+                <p>5. **Eternidade:** No fim, Deus cria um lugar perfeito sem choro nem tristeza para vivermos com Ele para sempre[cite: 1]!</p>
+                <br>
+                <p><em>Nota sobre ressurreição: É em etapas! Cada grupo tem o seu dia especial de acordar para sempre, mas ninguém acorda/ressuscita duas vezes[cite: 1].</em></p>
+            </div>
+
+            <div class="metafora-box">
+                <h3>📖 A Metáfora da Escola e da Professora</h3>
+                <p>"Uma grande escola tinha muitos alunos. Todos os anos a professora ensinava com muito cuidado: ela dava livros, explicava as lições e também avisava claramente o que ia acontecer na prova final[cite: 1].</p>
+                <p>Chegou o dia da avaliação final. Primeiro, a professora chamou uma parte dos alunos que confiaram nela e obedeceram ao que aprenderam. Eles foram levados para uma sala especial, receberam recompensa e tiveram uma festa boa, porque ficaram firmes[cite: 1].</p>
+                <p>Enquanto isso, na escola, começou um tempo de confusão e juízos: era como se as regras fossem ficando cada vez mais sérias, para mostrar quem realmente quis seguir os avisos[cite: 1].</p>
+                <p>Depois, chegou o fim da prova. A professora venceu o problema de vez e colocou todo mundo diante dela. Assim, cada aluno ficou sabendo exatamente o que ia acontecer com sua vida: os que foram para a sala da recompensa continuaram em paz, e os outros foram julgados com base no que fizeram, para saberem seu destino final[cite: 1].</p>
+                <p>E no final, a escola ficou em paz para sempre, porque a professora decidiu tudo com justiça[cite: 1]."</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openTab(tabId) {
+            // Esconde todos os conteúdos
+            const contents = document.querySelectorAll('.section-content');
+            contents.forEach(content => content.classList.remove('active'));
+
+            // Remove classe ativa de todos os botões
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+
+            // Mostra o selecionado
+            document.getElementById(tabId).classList.add('active');
+            
+            // Adiciona classe ativa no botão clicado
+            event.currentTarget.classList.add('active');
+        }
+    </script>
+</body>
+</html>
